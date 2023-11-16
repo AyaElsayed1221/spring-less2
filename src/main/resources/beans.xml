@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    You can use the property tage of the constructor-args tag to inject the literal dependencies as te following-->
+    <!-- The property tag use the setter method that exist inside the class internally. i.e. if you didn't implement a setter method u will get an exception.-->
+    <!-- The constructoe tag use the constructor inside the class internally, if there is not matches consructor it will throw an excetion. -->
+
+    <bean id="student1" class="org.example.Student" >
+        <property name="studentId" value="1"/>
+        <property name="studentName" value="Aya Elsayed"/>
+    </bean>
+
+
+    <bean id ="student2" class="org.example.Student">
+        <constructor-arg name="studentId" value="2" />
+        <constructor-arg name="studentName" value="Rahma"/>
+    </bean>
+<!--    when using constructor-arg in XML configuration for Spring, there's no need to specify the parameter name.-->
+<!--    Instead, you specify the argument values in the order that they appear in the constructor.-->
+<!--    Here's the corrected XML configuration for your Student bean:-->
+
+    <bean id="student3" class="org.example.Student">
+        <constructor-arg value="3" />
+        <constructor-arg value="Karma"/>
+    </bean>
+
+
+    <!--However, if you want to use named constructor arguments like I did with student2 bean, you should change the constructor in your Student class to
+    use @ConstructorProperties annotation from java.beans package, like this:
+
+    @ConstructorProperties({"studentId", "studentName"})
+    public Student(int studentId, String studentName) {
+    this.studentId = studentId;
+    this.studentName = studentName;
+    System.out.println("Constructor with all args is invoked");
+    } -->
+
+
+    <!-- Note: I can set only one dependency in the class, here for the student4 the id will be 4 and the name will be null. -->
+    <bean id="student4" class="org.example.Student" >
+        <property name="studentId" value="4"/>
+    </bean>
+
+    <!-- How can u obligate the developer to set all the fields in the class to create a bean or it will throw an exception ?  TASK u will get the answer of the question in the README file-->
+
+</beans>
